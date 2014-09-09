@@ -88,4 +88,3 @@
 
 <!-- Start the main container -->
 <div class="container" role="document">
-	<div class="row">

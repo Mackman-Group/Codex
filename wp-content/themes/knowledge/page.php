@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<div class="row">
+
 <!-- Row for main content area -->
 	<div class="small-12 large-8 columns" id="content" role="main">
 	
@@ -8,7 +10,6 @@
 		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 			<header>
 				<h1 class="entry-title"><?php the_title(); ?></h1>
-				<?php reverie_entry_meta(); ?>
 			</header>
 			<div class="entry-content">
 				<?php the_content(); ?>

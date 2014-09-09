@@ -5950,7 +5950,7 @@ meta.foundation-mq-topbar {
   .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
     border-bottom: none;
     border-top: none;
-    border-right: solid 1px #4e4e4e;
+    /*border-right: solid 1px #4e4e4e;*/
     clear: none;
     height: 45px;
     width: 0;

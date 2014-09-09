@@ -4,6 +4,8 @@ Template Name: Full Width
 */
 get_header(); ?>
 
+<div class="row">
+
 <!-- Row for main content area -->
 	<div class="small-12 large-12 columns" id="content" role="main">
 	
