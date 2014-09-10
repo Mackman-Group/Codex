@@ -13,7 +13,15 @@
 				<?php the_breadcrumb(); ?>
 			</header>
 			<div class="entry-content">
-				<?php the_content(); ?>
+			<?php 
+			if ( is_user_logged_in() ) 
+			{
+				the_content();
+			} 
+			else
+			{
+				the_excerpt();
+			}?>
 			</div>
 			<footer>
 				<?php wp_link_pages(array('before' => '<nav id="page-nav"><p>' . __('Pages:', 'reverie'), 'after' => '</p></nav>' )); ?>
