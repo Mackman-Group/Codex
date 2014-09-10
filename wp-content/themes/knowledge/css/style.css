@@ -520,11 +520,13 @@ ol.commentlist li section.comment a.comment-reply-link:hover, ol.commentlist li 
   font-weight: 600;
 }
 
-footer.full-width {
-  background-color: #fff;
-  border-top: 1px solid #ccc;
-  padding-top: 3rem;
+footer.full-width 
+{
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+	padding-top: 2rem;
 }
+
 footer.full-width p {
   font-size: 0.875rem;
 }
@@ -657,4 +659,25 @@ header.contain-to-grid
 .headerbar input[type="submit"]:hover
 {
 	background: #005e7d;
+}
+
+.subcategory
+{
+	position: relative;
+	left: 20px;
+}
+
+.subcategory h5
+{
+	margin-bottom: 0.05rem;
+}
+
+.subcategory ul
+{
+	margin-bottom: 0.25rem;
+}
+
+.category ul
+{
+	font-size: 0.8rem;
 }
