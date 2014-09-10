@@ -20,7 +20,14 @@
 			} 
 			else
 			{
-				the_excerpt();
+				if( ! has_excerpt() )
+				{
+					the_content();
+				}
+				else
+				{
+					the_excerpt();
+				}
 			}?>
 			</div>
 			<footer>
