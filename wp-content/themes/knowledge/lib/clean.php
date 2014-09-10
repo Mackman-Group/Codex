@@ -136,9 +136,6 @@ if( ! function_exists( 'reverie_scripts_and_styles ' ) ) {
 	    
 	    // adding Foundation scripts file in the footer
 	    wp_register_script( 'reverie-js', get_template_directory_uri() . '/js/foundation.min.js', array( 'jquery' ), '', true );
-		
-		// adding Prism scripts file in the footer
-	    wp_register_script( 'prism-js', get_template_directory_uri() . '/js/prism.js', array( 'jquery' ), '', true );
 	    
 	    global $is_IE;
 	    if ($is_IE) {
@@ -158,7 +155,6 @@ if( ! function_exists( 'reverie_scripts_and_styles ' ) ) {
 		
 	    wp_enqueue_script( 'reverie-js' );
 	    wp_enqueue_script( 'html5shiv' );
-		wp_enqueue_script( 'prism-js' );
 	  }
 	}
 }
