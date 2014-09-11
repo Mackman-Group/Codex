@@ -35,6 +35,8 @@ get_header(); ?>
 		$term_args=array( 'orderby' => 'name', 'order' => 'ASC' );
 		$terms = get_terms($taxonomy, $term_args);
 		
+		$private_tag = "private";
+		
 		if ($terms) 
 		{
 			foreach( $terms as $term ) 
@@ -49,95 +51,92 @@ get_header(); ?>
 				
 				$my_query = null;
 				$my_query = new WP_Query($args);
+				$querychildren = get_category_children($term->term_id);
 				
-				#if( $my_query->have_posts() ) 
-				#{
-					$querychildren = get_category_children($term->term_id);
-					if( $querychildren != ""  )
-					{
-						echo '<div class="category section">';
-							echo '<h3>';
-								echo $term->name;
-							echo '</h3>';
-							$childcategories =  get_categories('child_of='.$term->term_id);  
-							foreach  ($childcategories as $category) 
-							{
-								//Display the sub category information using $category values like $category->cat_name
-								echo '<div class="subcategory">';
-								echo '<h5>'.$category->name.'</h5>';
-								echo '<ul>';
+				
+				if( $querychildren != ""  ) // Subcategory code
+				{
+					echo '<div class="category section">';
+						echo '<h3>';
+							echo $term->name;
+						echo '</h3>';
+						$childcategories =  get_categories('child_of='.$term->term_id);  
+						foreach  ($childcategories as $category) 
+						{
+							echo '<div class="subcategory">';
+							echo '<h5>'.$category->name.'</h5>';
+							echo '<ul>';
 
-								foreach (get_posts('cat='.$category->term_id) as $post) 
+							foreach (get_posts('cat='.$category->term_id) as $post) 
+							{
+								if ( ! is_user_logged_in() )
 								{
+									if( ! has_tag($private_tag) )
+									{
+										setup_postdata( $post );
+										echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>';   
+									}
+								}
+								else
+								{
+									setup_postdata( $post );
+									echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>'; 
+								}
+							}  
+							echo '</ul>';
+							echo '</div>';
+						}
+						echo '<ul>';?>
+							<?php
+								while ($my_query->have_posts()) : $my_query->the_post(); 
 									if ( ! is_user_logged_in() )
 									{
-										if( ! has_tag("private") )
+										if( ! has_tag($private_tag) )
 										{
-											setup_postdata( $post );
-											echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>';   
+											echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
 										}
 									}
 									else
 									{
-										setup_postdata( $post );
-										echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>'; 
+										echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
 									}
-								}  
-								echo '</ul>';
-								echo '</div>';
-							}
-							echo '<ul>';?>
-								<?php
-									while ($my_query->have_posts()) : $my_query->the_post(); 
-										if ( ! is_user_logged_in() )
-										{
-											if( ! has_tag("private") )
-											{
-												echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
-											}
-										}
-										else
+								endwhile;
+							?>
+						<?php
+						echo '</ul>';
+					echo '</div>';
+				?>
+				<?php
+				}
+				else // Category code
+				{
+					if( $term->parent == 0 )
+					{?>
+					<div class="category section">
+						<h3>
+							<?php echo $term->name;?>
+						</h3>
+						<ul>
+							<?php
+								while ($my_query->have_posts()) : $my_query->the_post(); 
+									if ( ! is_user_logged_in() )
+									{
+										if( ! has_tag($private_tag) )
 										{
 											echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
 										}
-									endwhile;
-								?>
-							<?php
-							echo '</ul>';
-						echo '</div>';
-					?>
+									}
+									else
+									{
+										echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
+									}
+								endwhile;
+							?>
+						</ul>
+					</div>
 					<?php
 					}
-					else
-					{
-						if( $term->parent == 0 )
-						{?>
-						<div class="category section">
-							<h3>
-								<?php echo $term->name;?>
-							</h3>
-							<ul>
-								<?php
-									while ($my_query->have_posts()) : $my_query->the_post(); 
-										if ( ! is_user_logged_in() )
-										{
-											if( ! has_tag("private") )
-											{
-												echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
-											}
-										}
-										else
-										{
-											echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
-										}
-									endwhile;
-								?>
-							</ul>
-						</div>
-						<?php
-						}
-					}
-				#}
+				}
 			}
 		}
 		wp_reset_query();  // Restore global post data stomped by the_post().
