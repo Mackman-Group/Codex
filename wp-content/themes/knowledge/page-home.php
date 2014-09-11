@@ -69,16 +69,40 @@ get_header(); ?>
 
 								foreach (get_posts('cat='.$category->term_id) as $post) 
 								{
-									setup_postdata( $post );
-									echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>';   
+									if ( ! is_user_logged_in() )
+									{
+										if( ! has_tag("private") )
+										{
+											setup_postdata( $post );
+											echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>';   
+										}
+									}
+									else
+									{
+										setup_postdata( $post );
+										echo '<li><a href="'.get_permalink($post->ID).'">'.get_the_title().'</a></li>'; 
+									}
 								}  
 								echo '</ul>';
 								echo '</div>';
 							}
 							echo '<ul>';?>
-								<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
-									<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></li>
-								<?php endwhile;?><?php
+								<?php
+									while ($my_query->have_posts()) : $my_query->the_post(); 
+										if ( ! is_user_logged_in() )
+										{
+											if( ! has_tag("private") )
+											{
+												echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
+											}
+										}
+										else
+										{
+											echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
+										}
+									endwhile;
+								?>
+							<?php
 							echo '</ul>';
 						echo '</div>';
 					?>
@@ -93,9 +117,21 @@ get_header(); ?>
 								<?php echo $term->name;?>
 							</h3>
 							<ul>
-								<?php while ($my_query->have_posts()) : $my_query->the_post(); ?>
-									<li><a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title(); ?></a></li>
-								<?php endwhile;?>
+								<?php
+									while ($my_query->have_posts()) : $my_query->the_post(); 
+										if ( ! is_user_logged_in() )
+										{
+											if( ! has_tag("private") )
+											{
+												echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
+											}
+										}
+										else
+										{
+											echo '<li><a href="'; echo the_permalink(); echo '" rel="bookmark" title="Permanent Link to '; echo the_title_attribute(); echo '">'; echo the_title(); echo '</a></li>';
+										}
+									endwhile;
+								?>
 							</ul>
 						</div>
 						<?php
