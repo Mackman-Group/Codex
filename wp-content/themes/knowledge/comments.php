@@ -68,13 +68,13 @@
 <?php if ( comments_open() ) : ?>
 <section id="respond">
 	<h3><?php comment_form_title( __('Leave a Reply', 'reverie'), __('Leave a Reply to %s', 'reverie') ); ?></h3>
-	<p class="cancel-comment-reply"><?php cancel_comment_reply_link(); ?></p>
+	<!--<p class="cancel-comment-reply"><?php #cancel_comment_reply_link(); ?></p>-->
 	<?php if ( get_option('comment_registration') && !is_user_logged_in() ) : ?>
 	<p><?php printf( __('You must be <a href="%s">logged in</a> to post a comment.', 'reverie'), wp_login_url( get_permalink() ) ); ?></p>
 	<?php else : ?>
 	<form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
 		<?php if ( is_user_logged_in() ) : ?>
-		<p><?php printf(__('Logged in as <a href="%s/wp-admin/profile.php">%s</a>.', 'reverie'), get_option('siteurl'), $user_identity); ?> <a href="<?php echo wp_logout_url(get_permalink()); ?>" title="<?php __('Log out of this account', 'reverie'); ?>"><?php _e('Log out &raquo;', 'reverie'); ?></a></p>
+		<p><?php #printf(__('Logged in as <a href="%s/wp-admin/profile.php">%s</a>.', 'reverie'), get_option('siteurl'), $user_identity); ?> <a href="<?php #echo wp_logout_url(get_permalink()); ?>" title="<?php #__('Log out of this account', 'reverie'); ?>"><?php #_e('Log out &raquo;', 'reverie'); ?></a></p>
 		<?php else : ?>
 		<p>
 			<label for="author"><?php _e('Name', 'reverie'); if ($req) _e(' (required)', 'reverie'); ?></label>
@@ -93,7 +93,7 @@
 			<label for="comment"><?php _e('Comment', 'reverie'); ?></label>
 			<textarea name="comment" id="comment" tabindex="4"></textarea>
 		</p>
-		<p id="allowed_tags" class="small"><strong>XHTML:</strong> <?php _e('You can use these tags:','reverie'); ?> <code><?php echo allowed_tags(); ?></code></p>
+		<!--<p id="allowed_tags" class="small"><strong>XHTML:</strong> <?php #_e('You can use these tags:','reverie'); ?> <code><?php #echo allowed_tags(); ?></code></p>-->
 		<p><input name="submit" class="small radius button" type="submit" id="submit" tabindex="5" value="<?php esc_attr_e('Submit Comment', 'reverie'); ?>"></p>
 		<?php comment_id_fields(); ?>
 		<?php do_action('comment_form', $post->ID); ?>
