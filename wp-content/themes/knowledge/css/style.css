@@ -582,8 +582,8 @@ footer.full-width .love-reverie {
 
 	.footer-widget 
 	{
-		margin-top: 3rem;
-		padding-top: 2rem;
+		/*margin-top: 3rem;
+		padding-top: 2rem;*/
 	}
 
 	#content.small-12 
@@ -690,4 +690,9 @@ header.contain-to-grid
 .post
 {
 	margin-bottom: 20px;
+}
+
+.container
+{
+	padding-bottom: 20px;
 }
