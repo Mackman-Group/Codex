@@ -681,3 +681,8 @@ header.contain-to-grid
 {
 	font-size: 0.8rem;
 }
+
+.comment-author
+{
+	margin-bottom: 20px;
+}

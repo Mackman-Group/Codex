@@ -50,8 +50,8 @@ get_header(); ?>
 				$my_query = null;
 				$my_query = new WP_Query($args);
 				
-				if( $my_query->have_posts() ) 
-				{
+				#if( $my_query->have_posts() ) 
+				#{
 					$querychildren = get_category_children($term->term_id);
 					if( $querychildren != ""  )
 					{
@@ -101,7 +101,7 @@ get_header(); ?>
 						<?php
 						}
 					}
-				}
+				#}
 			}
 		}
 		wp_reset_query();  // Restore global post data stomped by the_post().
