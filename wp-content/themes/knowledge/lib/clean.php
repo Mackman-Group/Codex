@@ -136,6 +136,9 @@ if( ! function_exists( 'reverie_scripts_and_styles ' ) ) {
 	    
 	    // adding Foundation scripts file in the footer
 	    wp_register_script( 'reverie-js', get_template_directory_uri() . '/js/foundation.min.js', array( 'jquery' ), '', true );
+		
+		// adding Foundation scripts file in the footer
+	    wp_register_script( 'categories-js', get_template_directory_uri() . '/js/categories.js', array( 'jquery' ), '', true );
 	    
 	    global $is_IE;
 	    if ($is_IE) {
@@ -152,7 +155,7 @@ if( ! function_exists( 'reverie_scripts_and_styles ' ) ) {
 	    and your site will load faster.
 	    */
 	    wp_enqueue_script( 'jquery' );
-		
+		wp_enqueue_script( 'categories-js' );
 	    wp_enqueue_script( 'reverie-js' );
 	    wp_enqueue_script( 'html5shiv' );
 	  }
