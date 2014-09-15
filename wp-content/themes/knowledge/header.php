@@ -64,23 +64,6 @@
 	            ) ),
 	        ) );
 	    ?>
-	    <?php
-	    	// Uncomment the following to enable the right menu (additional menu)
-			
-	    	/*
-	        wp_nav_menu( array(
-	            'theme_location' => 'additional',
-	            'container' => false,
-	            'depth' => 0,
-	            'items_wrap' => '<ul class="right">%3$s</ul>',
-	            'walker' => new reverie_walker( array(
-	                'in_top_bar' => true,
-	                'item_type' => 'li',
-	                'menu_type' => 'main-menu'
-	            ) ),
-	        ) );
-	        */
-	    ?>
 	    </section>
 	</nav>
 	<!-- End of Top-Bar -->
